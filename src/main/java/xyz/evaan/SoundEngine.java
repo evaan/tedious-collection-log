@@ -1,4 +1,4 @@
-package com.github.m0bilebtw;
+package xyz.evaan;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,9 +13,6 @@ import java.io.InputStream;
 @Slf4j
 public class SoundEngine {
 
-    @Inject
-    private CEngineerCompletedConfig config;
-
     private static final long CLIP_MTIME_UNLOADED = -2;
 
     private long lastClipMTime = CLIP_MTIME_UNLOADED;
@@ -28,7 +25,7 @@ public class SoundEngine {
             }
             return true;
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            log.warn("Failed to load C Engineer sound " + sound, e);
+            log.warn("Failed to load Tedious sound " + sound, e);
         }
         return false;
     }
@@ -44,7 +41,7 @@ public class SoundEngine {
                 clip = AudioSystem.getClip();
             } catch (LineUnavailableException e) {
                 lastClipMTime = CLIP_MTIME_UNLOADED;
-                log.warn("Failed to get clip for C Engineer sound " + sound, e);
+                log.warn("Failed to get clip for Tedious sound " + sound, e);
                 return;
             }
 
@@ -56,7 +53,7 @@ public class SoundEngine {
 
         // User configurable volume
         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        float gain = 20f * (float) Math.log10(config.announcementVolume() / 100f);
+        float gain = 20f * (float) Math.log10(1);
         gain = Math.min(gain, volume.getMaximum());
         gain = Math.max(gain, volume.getMinimum());
         volume.setValue(gain);

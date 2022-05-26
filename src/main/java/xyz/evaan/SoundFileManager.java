@@ -1,4 +1,4 @@
-package com.github.m0bilebtw;
+package xyz.evaan;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.RuneLite;
@@ -24,10 +24,10 @@ import java.util.Set;
 @Slf4j
 public abstract class SoundFileManager {
 
-    private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + "c-engineer-sounds");
+    private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + "tedious-sounds");
     private static final String DELETE_WARNING_FILENAME = "EXTRA_FILES_WILL_BE_DELETED_BUT_FOLDERS_WILL_REMAIN";
     private static final File DELETE_WARNING_FILE = new File(DOWNLOAD_DIR, DELETE_WARNING_FILENAME);
-    private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/m0bilebtw/c-engineer-completed/sounds");
+    private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/evaan/tedious-collection-log/sounds");
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void ensureDownloadDirectoryExists() {
@@ -63,7 +63,7 @@ public abstract class SoundFileManager {
 
             if (RAW_GITHUB == null) {
                 // Hush intellij, it's okay, the potential NPE can't hurt you now
-                log.error("C Engineer Completed could not download sounds due to an unexpected null RAW_GITHUB value");
+                log.error("Tedious Collection Log could not download sounds due to an unexpected null RAW_GITHUB value");
                 return;
             }
             HttpUrl soundUrl = RAW_GITHUB.newBuilder().addPathSegment(fileName).build();
@@ -72,7 +72,7 @@ public abstract class SoundFileManager {
                 if (res.body() != null)
                     Files.copy(new BufferedInputStream(res.body().byteStream()), outputPath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
-                log.error("C Engineer Completed could not download sounds", e);
+                log.error("Tedious Collection Log could not download sounds", e);
                 return;
             }
         }
