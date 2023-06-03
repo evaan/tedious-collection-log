@@ -54,6 +54,11 @@ public class TediousCollectionLogPlugin extends Plugin
 
 	private static final Pattern COLLECTION_LOG_ITEM_REGEX = Pattern.compile("New item added to your collection log:.*");
 
+	@Provides
+	TediousCollectionLogConfig provideConfig(ConfigManager configManager) {
+		return configManager.getConfig(TediousCollectionLogConfig.class);
+	}
+
 	@Override
 	protected void startUp() throws Exception
 	{

@@ -12,6 +12,8 @@ import java.io.InputStream;
 @Singleton
 @Slf4j
 public class SoundEngine {
+    @Inject
+    private TediousCollectionLogConfig config;
 
     private static final long CLIP_MTIME_UNLOADED = -2;
 
@@ -53,7 +55,7 @@ public class SoundEngine {
 
         // User configurable volume
         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        float gain = 20f * (float) Math.log10(1);
+        float gain = 20f * (float) Math.log10(config.announcementVolume() / 100f);
         gain = Math.min(gain, volume.getMaximum());
         gain = Math.max(gain, volume.getMinimum());
         volume.setValue(gain);
